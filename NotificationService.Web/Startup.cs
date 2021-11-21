@@ -11,7 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NotificationService.Application.Settings;
 using NotificationService.Infrastructure;
+using NotificationService.Infrastructure.Clients;
 
 namespace NotificationService.Web
 {
@@ -27,7 +29,14 @@ namespace NotificationService.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructure(Configuration);
+            services.AddInfrastructure();
+            services.AddClients();
+            
+            services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings"));
+            services.Configure<SmscSettings>(Configuration.GetSection("SmscSettings"));
+            services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+
+            services.AddHttpClient();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

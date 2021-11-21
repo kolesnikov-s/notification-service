@@ -14,7 +14,16 @@ jobs:
         with:
            files: '**/appsettings.json'
         env:
-          ConnectionStrings.Default: ${{ secrets.DefaultConnectionString }}
+          ConnectionStrings.Default: ${{ secrets.CONNECTION_STRINGS_DEFAULT }}
+          TelegramSettings.Domain: ${{ secrets.TELEGRAM_SETTINGS_DOMAIN }}
+          TelegramSettings.BotToken: ${{ secrets.TELEGRAM_SETTINGS_BOT_TOKEN }}
+          SmscSettings.Login: ${{ secrets.SMSC_SETTINGS_LOGIN }}
+          SmscSettings.Password: ${{ secrets.SMSC_SETTINGS_PASSWORD }}
+          SmscSettings.URL: ${{ secrets.SMSC_SETTINGS_URL }}
+          SmtpSettings.Host: ${{ secrets.SMTP_SETTINGS_HOST }}
+          SmtpSettings.Port: ${{ secrets.SMTP_SETTINGS_PORT }}
+          SmtpSettings.EmailFrom: ${{ secrets.SMTP_SETTINGS_EMAIL_FROM }}
+          SmtpSettings.Password: ${{ secrets.SMTP_SETTINGS_PASSWORD }}
           
       - name: Login to DockerHub
         uses: docker/login-action@v1

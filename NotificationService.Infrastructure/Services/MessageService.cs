@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using NotificationService.Application;
 using NotificationService.Application.Interfaces;
@@ -32,7 +31,7 @@ namespace NotificationService.Infrastructure.Services
 
         private IMessageSender GetProviderByMessageType(string type)
         {
-            IMessageSender provider = type.ToLower() switch
+            IMessageSender provider = type?.ToLower() switch
             {
                 MessageType.Sms => _smsMessageService,
                 MessageType.Email => _emailMessageService,

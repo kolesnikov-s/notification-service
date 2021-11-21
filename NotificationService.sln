@@ -6,13 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService.Applica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService.Infrastructure", "NotificationService.Infrastructure\NotificationService.Infrastructure.csproj", "{A6F2B415-7F3A-412F-BC2E-77157A0A1F83}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationProviders", "NotificationProviders", "{73A74165-2752-48FE-80F0-F6D204F5FEB0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramMessageProvider", "TelegramMessageProvider\TelegramMessageProvider.csproj", "{A0CE2F05-12DF-4C3A-B9F4-9605E8B6C705}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailMessageProvider", "EmailMessageProvider\EmailMessageProvider.csproj", "{62BF48F6-7FC1-4371-B284-6E0C052701FE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmsMessageProvider", "SmsMessageProvider\SmsMessageProvider.csproj", "{A73937B8-C5BB-44FE-925D-6E063874775F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService.Infrastructure.Clients", "NotificationService.Infrastructure.Clients\NotificationService.Infrastructure.Clients.csproj", "{7913D50C-4266-40F4-A04D-0BA3701B6DA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,22 +26,11 @@ Global
 		{A6F2B415-7F3A-412F-BC2E-77157A0A1F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6F2B415-7F3A-412F-BC2E-77157A0A1F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6F2B415-7F3A-412F-BC2E-77157A0A1F83}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0CE2F05-12DF-4C3A-B9F4-9605E8B6C705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0CE2F05-12DF-4C3A-B9F4-9605E8B6C705}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0CE2F05-12DF-4C3A-B9F4-9605E8B6C705}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0CE2F05-12DF-4C3A-B9F4-9605E8B6C705}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62BF48F6-7FC1-4371-B284-6E0C052701FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62BF48F6-7FC1-4371-B284-6E0C052701FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62BF48F6-7FC1-4371-B284-6E0C052701FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62BF48F6-7FC1-4371-B284-6E0C052701FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A73937B8-C5BB-44FE-925D-6E063874775F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A73937B8-C5BB-44FE-925D-6E063874775F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A73937B8-C5BB-44FE-925D-6E063874775F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A73937B8-C5BB-44FE-925D-6E063874775F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7913D50C-4266-40F4-A04D-0BA3701B6DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7913D50C-4266-40F4-A04D-0BA3701B6DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7913D50C-4266-40F4-A04D-0BA3701B6DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7913D50C-4266-40F4-A04D-0BA3701B6DA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A0CE2F05-12DF-4C3A-B9F4-9605E8B6C705} = {73A74165-2752-48FE-80F0-F6D204F5FEB0}
-		{62BF48F6-7FC1-4371-B284-6E0C052701FE} = {73A74165-2752-48FE-80F0-F6D204F5FEB0}
-		{A73937B8-C5BB-44FE-925D-6E063874775F} = {73A74165-2752-48FE-80F0-F6D204F5FEB0}
 	EndGlobalSection
 EndGlobal

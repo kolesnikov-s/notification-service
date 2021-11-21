@@ -9,7 +9,6 @@ namespace NotificationService.Web.Controllers
     public class NotificationController: ControllerBase
     {
         private readonly IMessageService _messageService;
-
         public NotificationController(IMessageService messageService)
         {
             _messageService = messageService;
