@@ -4,6 +4,6 @@ namespace NotificationService.Application.Interfaces.Clients
 {
     public interface IEmailClient
     {
-        Task SendMessage(string email, string body, string subject = null);
+        Task<bool> SendMessage(string email, string body, string subject = null);
     }
 }

@@ -1,37 +1,60 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NotificationService.Application.Interfaces.Clients;
 using NotificationService.Application.Settings;
 
 namespace NotificationService.Infrastructure.Clients
 {
-    public class SmsCClient: ISmsCClient
+    public class SmsCClient : ISmsCClient
     {
+        private readonly ILogger<SmsCClient> _logger;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly SmscSettings _smscSettings;
 
-        public SmsCClient(IHttpClientFactory httpClientFactory, IOptions<SmscSettings> smscSettings)
+        public SmsCClient(ILogger<SmsCClient> logger, IHttpClientFactory httpClientFactory,
+            IOptions<SmscSettings> smscSettings)
         {
+            _logger = logger;
             _httpClientFactory = httpClientFactory;
             _smscSettings = smscSettings?.Value;
         }
-        
-        public async Task SendMessage(string phoneNumber, string text)
+
+        public async Task<bool> SendMessage(string phoneNumber, string text)
         {
-            var httpClient = _httpClientFactory.CreateClient();
-            
-            var result = await httpClient.PostAsync($"{_smscSettings.Url}/send.php?",
-                new FormUrlEncodedContent(new Dictionary<string, string>
-                {
-                    { "login", _smscSettings.Login },
-                    { "psw", _smscSettings.Password },
-                    { "phones", phoneNumber },
-                    { "mes", text }
-                }));
-            
-            // var response = await result.Content.ReadAsStringAsync();
+            var login = _smscSettings.Login;
+            var password = _smscSettings.Password;
+            var url = _smscSettings.Url;
+
+            using var httpClient = _httpClientFactory.CreateClient();
+            using var response = await httpClient
+                .PostAsync($"{url}/send.php?",
+                    new FormUrlEncodedContent(new Dictionary<string, string>
+                    {
+                        { "login", login },
+                        { "psw", password },
+                        { "phones", phoneNumber },
+                        { "mes", text }
+                    }));
+
+            bool isSent;
+
+            try
+            {
+                response.EnsureSuccessStatusCode();
+                isSent = true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error sending message: {ex?.Message}");
+                isSent = false;
+            }
+
+            return isSent;
         }
     }
 }

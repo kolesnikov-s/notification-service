@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NotificationService.Application.Interfaces;
 using NotificationService.Application.Models;
+using NotificationService.Entities;
 using NotificationService.RabbitQueue;
 
 namespace NotificationService.Web.Controllers
@@ -12,7 +14,6 @@ namespace NotificationService.Web.Controllers
     {
         private readonly IMessageService _messageService;
         private readonly IBus _busControl;
-
         public NotificationController(IMessageService messageService, IBus busControl)
         {
             _messageService = messageService;
@@ -22,9 +23,9 @@ namespace NotificationService.Web.Controllers
         [HttpPost, Route("message")]
         public async Task<IActionResult> SendMessage(SendMessageRequest request)
         {
-            await _messageService.SendMessage(request.Type, request.Contact, request.Text);
+            var result = await _messageService.SendMessage(request.Type, request.Contact, request.Text);
             
-            return Ok();
+            return Ok(result);
         }
         
         [HttpPost, Route("queue/message")]
@@ -32,6 +33,12 @@ namespace NotificationService.Web.Controllers
         {
             await _busControl.SendAsync(Queue.MessageQueue, request);
             
+            return Ok();
+        }
+        
+        [HttpPost, Route("test/message")]
+        public async Task<IActionResult> TestQueueMessage(SendMessageRequest request)
+        {
             return Ok();
         }
     }

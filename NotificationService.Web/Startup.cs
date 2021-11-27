@@ -6,8 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NotificationService.Application.Settings;
 using NotificationService.Infrastructure;
+using NotificationService.Infrastructure.BackgroundJobs;
 using NotificationService.RabbitQueue;
-using NotificationService.Workers;
+using NotificationService.Web.Handlers;
 
 namespace NotificationService.Web
 {
@@ -23,7 +24,7 @@ namespace NotificationService.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructure();
+            services.AddInfrastructure(Configuration);
             
             services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings"));
             services.Configure<SmscSettings>(Configuration.GetSection("SmscSettings"));
@@ -49,7 +50,6 @@ namespace NotificationService.Web
             {
             }
 
-            app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NotificationService.Web v1"));
 
@@ -58,6 +58,8 @@ namespace NotificationService.Web
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            app.ConfigureExceptionHandler();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

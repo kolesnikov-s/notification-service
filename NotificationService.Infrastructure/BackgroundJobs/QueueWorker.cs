@@ -6,7 +6,7 @@ using NotificationService.Application.Interfaces;
 using NotificationService.Application.Models;
 using NotificationService.RabbitQueue;
 
-namespace NotificationService.Workers
+namespace NotificationService.Infrastructure.BackgroundJobs
 {
     public class QueueWorker : BackgroundService
     {

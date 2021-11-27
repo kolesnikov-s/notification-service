@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using NotificationService.Application;
 using NotificationService.Application.Interfaces;
 using NotificationService.Application.Interfaces.MessageServices;
+using NotificationService.Application.Wrappers;
 
 namespace NotificationService.Infrastructure.Services
 {
@@ -22,11 +23,9 @@ namespace NotificationService.Infrastructure.Services
             _emailMessageService = emailMessageService;
         }
 
-        public async Task SendMessage(string type, string contact, string text)
+        public async Task<Response<Guid>> SendMessage(string type, string contact, string text)
         {
-            var provider = GetProviderByMessageType(type);
-
-            await provider.SendMessage(contact, text);
+            return await GetProviderByMessageType(type).SendMessage(contact, text);
         }
 
         private IMessageSender GetProviderByMessageType(string type)
@@ -36,7 +35,7 @@ namespace NotificationService.Infrastructure.Services
                 MessageType.Sms => _smsMessageService,
                 MessageType.Email => _emailMessageService,
                 MessageType.Telegram => _telegramMessageService,
-                _ => throw new Exception($"message type {type} not found")
+                _ => throw new Exception($"Message type {type} not found")
             };
 
             return provider;
