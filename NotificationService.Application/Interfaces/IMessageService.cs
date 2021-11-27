@@ -4,6 +4,6 @@ namespace NotificationService.Application.Interfaces
 {
     public interface IMessageService
     {
-        Task SendMessage(string type, string contact, string message);
+        Task SendMessage(string type, string contact, string text);
     }
 }

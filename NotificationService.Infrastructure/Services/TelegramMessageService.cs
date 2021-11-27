@@ -8,17 +8,16 @@ namespace NotificationService.Infrastructure.Services
     public class TelegramMessageService : ITelegramMessageService
     {
         private readonly ITelegramClient _telegramClient;
-
         public TelegramMessageService(ITelegramClient telegramClient)
         {
             _telegramClient = telegramClient;
         }
         
-        public async Task SendMessage(string contact, string message)
+        public async Task SendMessage(string contact, string text)
         {
-            await _telegramClient.SendMessage(contact, message);
+            await _telegramClient.SendMessage(contact, text);
             
-            Console.WriteLine($"Send Telegram Message: {contact} - {message}");
+            Console.WriteLine($"Send Telegram Message: {contact} - {text}");
         }
     }
 }

@@ -5,20 +5,19 @@ using NotificationService.Application.Interfaces.MessageServices;
 
 namespace NotificationService.Infrastructure.Services
 {
-    public class EmailMessageService: IEmailMessageService
+    public class EmailMessageService : IEmailMessageService
     {
         private readonly IEmailClient _emailClient;
-
         public EmailMessageService(IEmailClient emailClient)
         {
             _emailClient = emailClient;
         }
-        
-        public async Task SendMessage(string contact, string message)
+
+        public async Task SendMessage(string contact, string text)
         {
-            await _emailClient.SendMessage(contact, message);
-            
-            Console.WriteLine($"Send Email Message: {contact} - {message}");
+            await _emailClient.SendMessage(contact, text);
+
+            Console.WriteLine($"Send Email Message: {contact} - {text}");
         }
     }
 }

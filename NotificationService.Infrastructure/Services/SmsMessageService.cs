@@ -13,11 +13,11 @@ namespace NotificationService.Infrastructure.Services
             _smsCClient = smsCClient;
         }
         
-        public async Task SendMessage(string contact, string message)
+        public async Task SendMessage(string contact, string text)
         {
-            await _smsCClient.SendMessage(contact, message);
+            await _smsCClient.SendMessage(contact, text);
             
-            Console.WriteLine($"Send SMS Message: {contact} - {message}");
+            Console.WriteLine($"Send SMS Message: {contact} - {text}");
         }
     }
 }

@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NotificationService.Application.Settings;
 using NotificationService.Infrastructure;
-using NotificationService.Infrastructure.Clients;
+using NotificationService.RabbitQueue;
+using NotificationService.Workers;
 
 namespace NotificationService.Web
 {
@@ -30,11 +24,15 @@ namespace NotificationService.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure();
-            services.AddClients();
             
             services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings"));
             services.Configure<SmscSettings>(Configuration.GetSection("SmscSettings"));
             services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
+            
+            services.AddSingleton(sp => RabbitHutch.CreateBus(
+                    Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>()));
+            
+            services.AddHostedService<QueueWorker>();
 
             services.AddHttpClient();
             services.AddControllers();

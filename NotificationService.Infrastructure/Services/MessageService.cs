@@ -6,14 +6,14 @@ using NotificationService.Application.Interfaces.MessageServices;
 
 namespace NotificationService.Infrastructure.Services
 {
-    public class MessageService: IMessageService
+    public class MessageService : IMessageService
     {
         private readonly ITelegramMessageService _telegramMessageService;
         private readonly ISmsMessageService _smsMessageService;
         private readonly IEmailMessageService _emailMessageService;
 
         public MessageService(
-            ITelegramMessageService telegramMessageService, 
+            ITelegramMessageService telegramMessageService,
             ISmsMessageService smsMessageService,
             IEmailMessageService emailMessageService)
         {
@@ -21,12 +21,12 @@ namespace NotificationService.Infrastructure.Services
             _smsMessageService = smsMessageService;
             _emailMessageService = emailMessageService;
         }
-        
-        public async Task SendMessage(string type, string contact, string message)
+
+        public async Task SendMessage(string type, string contact, string text)
         {
             var provider = GetProviderByMessageType(type);
-            
-            await provider.SendMessage(contact, message);
+
+            await provider.SendMessage(contact, text);
         }
 
         private IMessageSender GetProviderByMessageType(string type)

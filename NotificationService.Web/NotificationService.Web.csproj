@@ -10,8 +10,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\NotificationService.Application\NotificationService.Application.csproj" />
-      <ProjectReference Include="..\NotificationService.Infrastructure.Clients\NotificationService.Infrastructure.Clients.csproj" />
       <ProjectReference Include="..\NotificationService.Infrastructure\NotificationService.Infrastructure.csproj" />
+      <ProjectReference Include="..\NotificationService.Workers\NotificationService.Workers.csproj" />
     </ItemGroup>
 
 </Project>
