@@ -35,11 +35,5 @@ namespace NotificationService.Web.Controllers
             
             return Ok();
         }
-        
-        [HttpPost, Route("test/message")]
-        public async Task<IActionResult> TestQueueMessage(SendMessageRequest request)
-        {
-            return Ok();
-        }
     }
 }

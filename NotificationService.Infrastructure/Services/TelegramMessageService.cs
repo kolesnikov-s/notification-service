@@ -17,7 +17,6 @@ namespace NotificationService.Infrastructure.Services
         private readonly ILogger<TelegramMessageService> _logger;
         private readonly ITelegramClient _telegramClient;
         private readonly IDbContextFactory<NotificationDbContext> _contextFactory;
-        private readonly INotificationDbContext _context;
 
         public TelegramMessageService(
             ILogger<TelegramMessageService> logger,
